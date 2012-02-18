@@ -43,7 +43,7 @@ Installation
 	sudo rake install
 	
 	# enable the sundown extension by adding the following line to your php.ini
-	# extension=sundown.so
+	extension=sundown.so
 
 ### Download the KwattroMarkdownBundle
 
