@@ -1,0 +1,10 @@
+parameters:
+  kwattro_markdown.extensions_config:
+    no_intra_emphasis: %kwattro_markdown.extensions.no_intra_emphasis%
+    tables: %kwattro_markdown.extensions.tables%
+    fenced_code_blocks: %kwattro_markdown.extensions.fenced_code_blocks%
+    autolink: %kwattro_markdown.extensions.autolink%
+    strikethrough: %kwattro_markdown.extensions.strikethrough%
+    lax_html_blocks: %kwattro_markdown.extensions.lax_html_blocks%
+    space_after_headers: %kwattro_markdown.extensions.space_after_headers%
+    superscript: %kwattro_markdown.extensions.superscript%

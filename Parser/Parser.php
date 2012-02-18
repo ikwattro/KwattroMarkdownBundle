@@ -59,7 +59,13 @@ class Parser
      */
     protected $config = array(
         'no_intra_emphasis' => false,
+        'tables' => true,
+        'fenced_code_blocks' => true,
         'autolink' => true,
+        'strikethrough' => true,
+        'lax_html_blocks' => true,
+        'space_after_headers' => true,
+        'superscript' => false,
     );
     
     /**

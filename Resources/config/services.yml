@@ -1,5 +1,5 @@
 parameters:
-#    kwattro_markdown.example.class: Kwattro\MarkdownBundle\Example
+  kwattro_markdown.extensions_config: %kwattro_markdown.extensions_config%
 
 services:
   kwattro_markdown.twig_filter:
@@ -12,3 +12,4 @@ services:
   
   kwattro_markdown:
     class: Kwattro\MarkdownBundle\Markdown\KwattroMarkdown
+    arguments: [%kwattro_markdown.extensions_config%]

@@ -28,10 +28,11 @@ class KwattroMarkdownExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 		
-		$this->bindParameters($container, 'kwattro_markdown', $config);
+	$this->bindParameters($container, 'kwattro_markdown', $config);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('extensions.yml');
     }
 	
 	public function getAlias()
