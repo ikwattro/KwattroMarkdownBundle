@@ -1,0 +1,8 @@
+parameters:
+#    kwattro_markdown.example.class: Kwattro\MarkdownBundle\Example
+
+services:
+  kwattro_markdown.twig_filter:
+    class: %kwattro_markdown.twig_extension%
+    tags:
+      - { name: twig.extension }
