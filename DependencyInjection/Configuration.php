@@ -28,16 +28,21 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
         	->children()
-				->scalarNode('twig_extension')->defaultValue('Kwattro\MarkdownBundle\Twig\Extension\KwattroMarkdownExtension')->end()
-				->scalarNode('render')->defaultValue('html')->end()
+                    ->scalarNode('twig_extension')->defaultValue('Kwattro\MarkdownBundle\Twig\Extension\KwattroMarkdownExtension')->end()
+                    ->scalarNode('render')->defaultValue('html')->end()
                 ->arrayNode('extensions')
                 ->addDefaultsIfNotSet()
                 ->children()
                     ->booleanNode('no_intra_emphasis')->defaultFalse()->end()
+                    ->booleanNode('tables')->defaultTrue()->end()
+                    ->booleanNode('fenced_code_blocks')->defaultTrue()->end()
                     ->booleanNode('autolink')->defaultTrue()->end()
+                    ->booleanNode('strikethrough')->defaultTrue()->end()
+                    ->booleanNode('lax_html_blocks')->defaultFalse()->end()
+                    ->booleanNode('space_after_headers')->defaultTrue()->end()
+                    ->booleanNode('superscript')->defaultFalse()->end()
                     ->end()
-                
-				->end();
+                ->end();
 
         return $treeBuilder;
     }
