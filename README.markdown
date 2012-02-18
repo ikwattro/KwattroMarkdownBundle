@@ -3,6 +3,21 @@ KwattroMarkdownBundle
 
 This bundle lets you easily make use of the markdown parser inside your Symfony applications.
 
+Status
+------
+
+This bundle is in development phase. Do not hesitate to contribute.
+
+#### Todo's:
+
+* Merge the parameters with the DI config
+* Add all possible extensions to DI config
+* Add flags feature
+* Convert config files to .xml
+* Make the Twig extension use of Markdown class
+* Add some tests
+* Request feedbacks
+
 Open Source Community
 ---------------------
 
