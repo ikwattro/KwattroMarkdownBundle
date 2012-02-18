@@ -1,7 +1,20 @@
 KwattroMarkdownBundle
 ====================
 
-This is a wrapper of the [php-sundown] (https://github.com/chobie/php-sundown) project.
+This bundle lets you easily make use of the markdown parser inside your Symfony applications.
+
+Open Source Community
+---------------------
+
+This bundle wraps the work of amazing developers:
+
+`Sundown` is based on the original Upskirt parser by Natacha Porté, with many additions
+by Vicent Marti (@tanoku) and contributions from the following authors:
+
+	Ben Noordhuis, Bruno Michel, Joseph Koshy, Krzysztof Kowalczyk, Samuel Bronson,
+	Shuhei Tanuma
+
+`php-sundown` is a php wrapper of the `Sundown` project made by [chobie] (https://github.com/chobie/php-sundown)
 
 Installation
 -------------
