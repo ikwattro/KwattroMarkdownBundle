@@ -40,7 +40,7 @@
 	public function getFilters()
 	{
 		return array(
-		'markdown' => new \Twig_Filter_Method($this, 'markdown')
+		'markdown' => new \Twig_Filter_Method($this, 'markdown', array('is_safe'=>array('html')))
 		); 
 	}
 	
@@ -52,7 +52,7 @@
 	 */
 	public function markdown($string)
 	{
-		$markdown = new \Sundown\Markdown(\Sundown\Render\HTML);
+		$markdown = new \Sundown\Markdown(\Sundown\Render\HTML, array("autolink" => true));
 		$mdown = $markdown->render($string);
 		
 		return $mdown;
