@@ -31,6 +31,7 @@ class Parser
      * 
      * The renderer to be used 
      */
+    private $renderer;
     
     /**
      * @var boolean no_intra_emphasis
