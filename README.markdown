@@ -16,6 +16,7 @@ This bundle is in development phase. Do not hesitate to contribute.
 * Convert config files to .xml
 * ~~Make the Twig extension use of Markdown class~~
 * Add some tests
+* Structured docs
 * Request feedbacks
 
 Open Source Community
