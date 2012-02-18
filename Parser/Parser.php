@@ -127,9 +127,9 @@ class Parser
      */
     public function getRenderer($renderer)
     {
-        if(!is_null($renderer) && !array_key_exists($renderer, $this->renderers))
+        if(!empty($renderer) && !in_array($renderer, $this->renderers))
         {
-            throw new \InvalidArgumentException('The renderer specified is not a valid renderer');
+            throw new \InvalidArgumentException('The renderer "'.$renderer.'" is not a valid renderer');
         }
         
         switch($renderer)

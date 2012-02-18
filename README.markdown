@@ -10,11 +10,11 @@ This bundle is in development phase. Do not hesitate to contribute.
 
 #### Todo's:
 
-* Merge the parameters with the DI config
+* ~~Merge the parameters with the DI config~~
 * ~~Add all possible extensions to DI config~~
 * Add flags feature
 * Convert config files to .xml
-* Make the Twig extension use of Markdown class
+* ~~Make the Twig extension use of Markdown class~~
 * Add some tests
 * Request feedbacks
 
@@ -83,9 +83,9 @@ How to use it
 
 You can easily use the markdown parser in your Twig templates:
 
-    {{ body | markdown | raw }}
+    {{ body | markdown }}
 
-Or in your controllers by using the ``kwattro_md`` alias:
+Or in your controllers by using the ``kwattro_markdown`` service name:
 
     $markdown = $this->container->get('kwattro_md');
     $string = $body; //Some string to transform

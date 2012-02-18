@@ -13,15 +13,23 @@
 
  namespace Kwattro\MarkdownBundle\Twig\Extension;
  
+ use Kwattro\MarkdownBundle\Markdown\KwattroMarkdown as Markdown;
+ 
  class KwattroMarkdownExtension extends \Twig_Extension
  {
- 	protected $markdown;
-	
-	protected $render;
-	
-	public function __construct()
+        /**
+         *
+         * @var Markdown 
+         */
+        private $markdown;
+        
+        /**
+         * Creates the Extension instance
+         * @param Markdown $markdown 
+         */
+	public function __construct(Markdown $markdown)
 	{
-		
+            $this->markdown = $markdown;
 	}
 	
 	/**
@@ -48,13 +56,12 @@
 	 * Transforms the text into a markdown style
 	 * 
 	 * @param string The text to be transformed
+         * @param array $options Optional : An array with the extensions options
+         * @param string $renderer Optional: The desired renderer
 	 * @return string The transformed text
 	 */
-	public function markdown($string)
+	public function markdown($string, array $options = array(), $renderer = null)
 	{
-		$markdown = new \Sundown\Markdown(\Sundown\Render\HTML);
-		$mdown = $markdown->render($string);
-		
-		return $mdown;
+            return $this->markdown->render($string, $renderer, $options);
 	}
  }
