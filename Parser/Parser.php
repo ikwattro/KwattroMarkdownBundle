@@ -19,11 +19,6 @@ class Parser
 {
     
     /**
-     * @var Markdown 
-     */
-    private $markdown;
-    
-    /**
      * @var array available renderers
      * Default renderer is 'html', you can specify the desired renderer
      * in the constructor
@@ -61,26 +56,27 @@ class Parser
      * @var array the default configuration
      *  
      */
-    private $config = array(
+    protected $config = array(
         'no_intra_emphasis' => false,
         'autolink' => true,
     );
+    
+    /**
+     * @var array enabled extensions - passed to the Markdown instance to configure the rendering
+     * Only the true values from config keys are passed to this array. 
+     */
+    private $enabled_extensions;
     
     /**
      * Create a new Parser instance and configure the enabled extensions
      * 
      * @param array $extensions
      * @param string $renderer
-     * @return Parser $parser
      */
     public function __construct(array $options = array(), $renderer = 'html')
     {
-        $this->configure($options, $renderer);
-        $this->getRenderer($renderer);
-        
-        $parser = new Markdown($renderer, $options);
-        
-        return $parser;
+        $this->configure($options);
+        $this->renderer = $this->getRenderer($renderer);
     }
     
     
@@ -91,16 +87,28 @@ class Parser
      */
     public function configure(array $options)
     {
-        if(!null($options))
+        if(!is_null($options))
         {
             foreach($options as $key => $value)
             {
-                if(!array_key_exists($key, $config))
+                if(!array_key_exists($key, $this->config))
                 {
                     throw new \InvalidArgumentException('The configuration parameter '.$key.' for the Markdown configuration does not exist');
                 }
             }
-            array_merge($this->config, $options);
+            $config = array_merge($this->config, $options);
+            
+            $this->config = $config;
+        }
+        
+        // Creates the enabled_extensions array
+        $this->enabled_extensions = array();
+        foreach($this->config as $key => $value)
+        {
+            if($value)
+            {
+                $this->enabled_extensions[$key] = $value;
+            }
         }
     }
     
@@ -112,7 +120,7 @@ class Parser
      */
     public function getRenderer($renderer)
     {
-        if(!array_key_exists($renderer, $this->renderers))
+        if(!is_null($renderer) && !array_key_exists($renderer, $this->renderers))
         {
             throw new \InvalidArgumentException('The renderer specified is not a valid renderer');
         }
@@ -135,6 +143,18 @@ class Parser
                 return new \Sundown\Render\HTML();
                 break;
         }
+    }
+    
+    /**
+     * Render the transformed text as specified by the renderer and the config
+     * @param string $text
+     * @return string The transformed text 
+     */
+    public function render($text)
+    {
+        $markdown = new Markdown($this->renderer, $this->enabled_extensions);
+        
+        return $markdown->render($text);
     }
     
 }

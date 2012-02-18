@@ -52,7 +52,7 @@
 	 */
 	public function markdown($string)
 	{
-		$markdown = new \Sundown\Markdown(\Sundown\Render\HTML, array("autolink" => true));
+		$markdown = new \Sundown\Markdown(\Sundown\Render\HTML);
 		$mdown = $markdown->render($string);
 		
 		return $mdown;
