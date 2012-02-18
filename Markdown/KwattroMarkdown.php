@@ -35,9 +35,9 @@ class KwattroMarkdown
     
     /**
      * Parse the given string with the Sundown Parser
-     * @param string $text
-     * @param string $renderer
-     * @param array $options
+     * @param string $text The text to transform
+     * @param string $renderer The desired renderer
+     * @param array $options The extensions configuration
      * @return string The transformed text 
      */
     public function render($text, $renderer = null, array $options = array())
