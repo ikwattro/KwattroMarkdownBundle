@@ -30,6 +30,13 @@ class Configuration implements ConfigurationInterface
         	->children()
 				->scalarNode('twig_extension')->defaultValue('Kwattro\MarkdownBundle\Twig\Extension\KwattroMarkdownExtension')->end()
 				->scalarNode('render')->defaultValue('html')->end()
+                ->arrayNode('extensions')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->booleanNode('no_intra_emphasis')->defaultFalse()->end()
+                    ->booleanNode('autolink')->defaultTrue()->end()
+                    ->end()
+                
 				->end();
 
         return $treeBuilder;
