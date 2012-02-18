@@ -50,3 +50,15 @@ And finally, register the bundle in your AppKernel
         );
     }
 
+How to use it
+-------------
+
+You can easily use the markdown parser in your Twig templates:
+
+    {{ body | markdown | raw }}
+
+Or in your controllers by using the ``kwattro_md`` alias:
+
+    $markdown = $this->container->get('kwattro_md');
+    $string = $body; //Some string to transform
+    $output = $markdown->markdown($string);

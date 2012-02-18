@@ -6,3 +6,6 @@ services:
     class: %kwattro_markdown.twig_extension%
     tags:
       - { name: twig.extension }
+  
+  kwattro_md:
+    alias: kwattro_markdown.twig_filter

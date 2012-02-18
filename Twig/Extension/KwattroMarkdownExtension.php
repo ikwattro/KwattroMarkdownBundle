@@ -40,7 +40,7 @@
 	public function getFilters()
 	{
 		return array(
-		'kdown' => new \Twig_Filter_Method($this, 'renderMarkdown')
+		'markdown' => new \Twig_Filter_Method($this, 'markdown')
 		); 
 	}
 	
@@ -50,9 +50,9 @@
 	 * @param string The text to be transformed
 	 * @return string The transformed text
 	 */
-	public function renderMarkdown($string)
+	public function markdown($string)
 	{
-		$markdown = new \Markdown\Markdown(\Markdown\Render\HTML);
+		$markdown = new \Sundown\Markdown(\Sundown\Render\HTML);
 		$mdown = $markdown->render($string);
 		
 		return $mdown;
