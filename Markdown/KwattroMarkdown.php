@@ -19,18 +19,25 @@ class KwattroMarkdown
 {
     
     /**
+     * @var Parser 
+     */
+    private $parser;
+    
+    /**
      *@var array extensions configuration 
      */
     private $extensions;
     
     /**
      * Creates a new Markdown instance
-     * @param array $enabled_extensions 
+     * @param array $extensions_config The enabled extensions 
      */
     
-    public function __construct(array $extensions_config)
+    public function __construct(array $extensions_config, $renderer)
     {
         $this->extensions = $extensions_config;
+        
+        $this->parser = new Parser();
     }
     
     /**
@@ -47,9 +54,7 @@ class KwattroMarkdown
             $this->extensions = $options;
         }
         
-        $parser = new Parser($this->extensions, $renderer);
-        
-        return $parser->render($text);
+        return $this->parser->render($text);
     }
     
     /**

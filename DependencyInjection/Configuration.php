@@ -29,7 +29,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
         	->children()
                     ->scalarNode('twig_extension')->defaultValue('Kwattro\MarkdownBundle\Twig\Extension\KwattroMarkdownExtension')->end()
-                    ->scalarNode('render')->defaultValue('html')->end()
+                    ->scalarNode('renderer')->defaultValue('html')->end()
                 ->arrayNode('extensions')
                 ->addDefaultsIfNotSet()
                 ->children()
