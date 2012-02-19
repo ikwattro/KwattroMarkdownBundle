@@ -63,7 +63,7 @@ class Parser
         'fenced_code_blocks' => true,
         'autolink' => true,
         'strikethrough' => true,
-        'lax_html_blocks' => true,
+        'lax_html_blocks' => false,
         'space_after_headers' => true,
         'superscript' => false,
     );
