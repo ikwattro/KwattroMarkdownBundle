@@ -159,8 +159,8 @@ class Parser
      */
     public function render($text)
     {
-        $markdown = new Markdown($this->renderer, $this->enabled_extensions);
-        //$markdown = new Markdown($this->renderer, $this->config);
+        //$markdown = new Markdown($this->renderer, $this->enabled_extensions);
+        $markdown = new Markdown($this->renderer, $this->config);
         
         return $markdown->render($text);
     }
