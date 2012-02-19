@@ -19,14 +19,36 @@ class KwattroMarkdown
 {
     
     /**
-     * @var Parser 
+     * @var Parser $parser
      */
     private $parser;
     
     /**
-     *@var array extensions configuration 
+     * @var array $extensions configuration 
      */
-    private $extensions;
+    private $extensions = array(
+        'no_intra_emphasis' => false,
+        'tables' => true,
+        'fenced_code_blocks' => true,
+        'autolink' => true,
+        'strikethrough' => true,
+        'lax_html_blocks' => false,
+        'space_after_headers' => true,
+        'superscript' => false,
+    );
+    
+    /**
+     * @var array $renderers available renderers
+     * Default renderer is 'html', you can specify the desired renderer
+     * in the constructor
+     * 
+     */
+    private $renderers = array('base', 'html', 'xhtml');
+    
+    /**
+     * @var string $renderer The default renderer specified by the service configuration 
+     */
+    private $renderer;
     
     /**
      * Creates a new Markdown instance
@@ -35,9 +57,9 @@ class KwattroMarkdown
     
     public function __construct(array $extensions_config, $renderer)
     {
-        $this->extensions = $extensions_config;
-        
         $this->parser = new Parser();
+        
+        $this->configure($extensions_config, $renderer);
     }
     
     /**
@@ -47,14 +69,35 @@ class KwattroMarkdown
      * @param array $options The extensions configuration
      * @return string The transformed text 
      */
-    public function render($text, $renderer = null, array $options = array())
+    public function render($text, array $options = array(), $renderer = null)
     {
-        if(!empty($options))
-        {
-            $this->extensions = $options;
-        }
+        $this->configure($options, $renderer);
         
         return $this->parser->render($text);
+    }
+    
+    public function configure(array $extensions = array(), $renderer = null)
+    {
+        foreach($extensions as $key => $value)
+            {
+                $this->checkIfValidExtension($key);
+            }
+            
+        $this->extensions = array_merge($this->extensions, $extensions);
+        
+        /**
+         * @TODO check if valid renderer and import from Parser 
+         */
+        $this->renderer = $renderer;
+    }
+    
+    public function isValidExtension($extension)
+    {
+        if(!empty($extension) && array_key_exists($extension, $this->extensions))
+        {
+            return true;
+        }
+        throw new \InvalidArgumentException('The extension '.$extension.' is not a valid Markdown extension');
     }
     
     /**
