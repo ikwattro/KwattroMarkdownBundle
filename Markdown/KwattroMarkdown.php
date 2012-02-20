@@ -62,8 +62,6 @@ class KwattroMarkdown
     public function __construct(array $extensions_config, $renderer)
     {        
         $this->configure($extensions_config, $renderer);
-        
-        $this->setUpMarkdown();
     }
     
     /**
@@ -85,10 +83,7 @@ class KwattroMarkdown
      */
     public function setUpMarkdown()
     {
-        if(!$this->parser instanceof Parser)
-        {
-            $this->parser = new Parser();
-        }
+        $this->parser = new Parser($this->renderer, $this->extensions);
     }
     
     /**
@@ -98,7 +93,7 @@ class KwattroMarkdown
      */
     public function transform($text)
     {
-        return $this->parser->render($this->renderer, $this->extensions);
+        return $this->parser->render($text, $this->extensions);
     }
     
     /**
@@ -125,6 +120,8 @@ class KwattroMarkdown
                 $this->renderer = new $this->renderers[$renderer];
             }
         }
+        
+        $this->setUpMarkdown();
     }
     
     /**

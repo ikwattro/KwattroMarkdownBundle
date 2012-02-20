@@ -16,14 +16,5 @@ use \Sundown\Markdown as Markdown;
 
 class Parser extends Markdown
 {
-    /**
-     * Create a new Parser instance and configure the enabled extensions
-     * 
-     * @param array $extensions
-     * @param string $renderer
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    
 }
