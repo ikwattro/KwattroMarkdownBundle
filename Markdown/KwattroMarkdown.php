@@ -171,4 +171,9 @@ class KwattroMarkdown
         
         return $enabled;
     }
+    
+    public function getParser()
+    {
+        return $this->parser;
+    }
 }
