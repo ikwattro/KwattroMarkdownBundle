@@ -11,6 +11,8 @@ env:
 
 before_script:
   - ls -l
+  - cd ../..
+  - ls -l
   - php vendor/vendors.php
   - git clone https://github.com/chobie/php-sundown php-sundown -b development
   - sh -c "cd php-sundown && rake submodule compile && sudo rake install"
