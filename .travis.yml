@@ -15,5 +15,5 @@ before_script:
   - ls -l
   - cd php-sundown
   - ls -l
-  - sudo rake install
+  - sh -c "sudo rake install"
   - echo "extension=sundown.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
