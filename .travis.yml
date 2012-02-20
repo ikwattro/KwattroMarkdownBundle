@@ -4,9 +4,6 @@ php:
   - 5.3
   - 5.4
 
-branches:
-  only:
-    travis
 before_script:
   - php vendor/vendors.php
   - git clone https://github.com/chobie/php-sundown php-sundown -b development
