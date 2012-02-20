@@ -10,10 +10,7 @@ env:
 
 before_script:
   - php vendor/vendors.php
-  - git clone https://github.com/chobie/php-sundown php-sundown -b development
-  - sh -c "cd php-sundown && rake submodule compile"
-  - ls -l
-  - cd php-sundown
-  - ls -l
-  - sh -c "sudo bundle exec rake install"
+  - wget http://pecl.php.net/get/sundown-0.1.0b.tgz
+  - tar -xzf sundown-0.1.0b.tgz
+  - sh -c "cd sundown-0.1.0b && phpize && ./configure --enable-sundown && make && sudo make install"
   - echo "extension=sundown.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
