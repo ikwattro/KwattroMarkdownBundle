@@ -13,7 +13,7 @@ before_script:
   - git clone https://github.com/chobie/php-sundown php-sundown -b development
   - sh -c "cd php-sundown && rake submodule compile"
   - ls -l
-  - sh -c "cd php-sundown"
+  - cd php-sundown
   - ls -l
   - sudo rake install
   - echo "extension=sundown.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
