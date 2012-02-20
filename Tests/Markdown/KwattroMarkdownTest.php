@@ -42,4 +42,12 @@ class MarkdownBundleTest extends \PHPUnit_Framework_TestCase
         $expected = '<p><a href="https://github.com">https://github.com</a></p>'."\n";
         $this->assertEquals($expected, $md->render($link));
     }
+    
+    public function testRenderWithArgs()
+    {
+        $md = new Markdown(array('autolink' => false), 'html');
+        $link = "https://github.com";
+        $expected = '<p>'.$link.'</p>'."\n";
+        $this->assertEquals($expected, $md->render($link));
+    }
 }
