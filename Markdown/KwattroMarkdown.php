@@ -93,7 +93,7 @@ class KwattroMarkdown
      */
     public function transform($text)
     {
-        return $this->parser->render($text, $this->extensions);
+        return $this->parser->render($text);
     }
     
     /**
