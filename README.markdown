@@ -8,6 +8,8 @@ Status
 
 This bundle is in development phase. Do not hesitate to contribute.
 
+[![Build Status](https://secure.travis-ci.org/kwattro/KwattroMarkdownBundle.png?branch=master)](http://travis-ci.org/kwattro/KwattroMarkdownBundle)
+
 #### Todo's:
 
 * ~~Merge the parameters with the DI config~~
