@@ -4,14 +4,7 @@ php:
   - 5.3
   - 5.4
 
-env:
-  - SYMFONY_VERSION=v2.0.10
-  - SYMFONY_VERSION=origin/2.0
-  - SYMFONY_VERSION=origin/master
-
-before_install:
-  - sh -c "cd kwattro/KwattroMarkdownBundle/libs/php-sundown && rake submodule compile && sudo rake install"
-  - echo "extension=sundown.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
-
 before_script:
   - php vendor/vendors.php
+  - sh -c "cd kwattro/KwattroMarkdownBundle/libs/php-sundown && rake submodule compile && sudo rake install"
+  - echo "extension=sundown.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
