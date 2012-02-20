@@ -4,7 +4,12 @@ php:
   - 5.3
   - 5.4
 
-before_script: php vendor/vendors.php
+before_script:
+  - wget -nc http://getcomposer.org/composer.phar
+  - php composer.phar install
 
-script: phpunit --coverage-test
+script: phpunit --coverage-text
 
+notifications:
+  email:
+    - friendsofsymfony-dev@googlegroups.com
