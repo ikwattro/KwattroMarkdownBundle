@@ -9,5 +9,5 @@ branches:
     travis
 before_script:
   - php vendor/vendors.php
-  - sh -c "cd kwattro/KwattroMarkdownBundle/libs/php-sundown && rake submodule compile && sudo rake install"
+  - sh -c "cd libs/php-sundown && rake submodule compile && sudo rake install"
   - echo "extension=sundown.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
