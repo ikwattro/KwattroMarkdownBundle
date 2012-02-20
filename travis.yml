@@ -4,6 +4,9 @@ php:
   - 5.3
   - 5.4
 
+branches:
+  only:
+    travis
 before_script:
   - php vendor/vendors.php
   - sh -c "cd kwattro/KwattroMarkdownBundle/libs/php-sundown && rake submodule compile && sudo rake install"
