@@ -150,7 +150,7 @@ class KwattroMarkdown
      */
     public function isValidRenderer($renderer)
     {
-        if(!empty($renderer) && in_array($renderer, $this->renderers))
+        if(!empty($renderer) && array_key_exists($renderer, $this->renderers))
         {
             return true;
         }

@@ -10,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that is bundled with this package.
  */
-
 namespace Kwattro\MarkdownBundle\Parser;
 
 use \Sundown\Markdown as Markdown;
@@ -27,5 +26,4 @@ class Parser extends Markdown
     {
         parent::__construct();
     }
-    
 }
