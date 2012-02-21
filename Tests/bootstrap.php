@@ -7,7 +7,9 @@ require_once $vendorDir.'/symfony/src/Symfony/Component/ClassLoader/UniversalCla
 use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 $loader = new UniversalClassLoader();
-
+$loader->registerPrefixes(array(
+    'Twig_' => $vendorDir.'/twig/lib',
+));
 $loader->register();
 
 spl_autoload_register(function($class)
