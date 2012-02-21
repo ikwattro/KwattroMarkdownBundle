@@ -62,6 +62,6 @@
 	 */
 	public function markdown($string, array $options = array(), $renderer = null)
 	{
-            return $this->markdown->render($string, $renderer, $options);
+            return $this->markdown->render($string, $options, $renderer);
 	}
  }

@@ -14,7 +14,7 @@ namespace Kwattro\MarkdownBundle\Tests\Markdown;
 
 use Kwattro\MarkdownBundle\Markdown\KwattroMarkdown as Markdown;
 
-class MarkdownBundleTest extends \PHPUnit_Framework_TestCase
+class KwattroMarkdownTest extends \PHPUnit_Framework_TestCase
 {
     public function testMarkdown()
     {
