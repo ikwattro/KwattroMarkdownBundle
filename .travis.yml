@@ -7,10 +7,11 @@ php:
 env:
   - SYMFONY_VERSION=v2.0.9
   - SYMFONY_VERSION=origin/2.0
+  - SYMFONY_VERSION=origin/master
 
 before_script:
   - php vendor/vendors.php
-  - wget http://pecl.php.net/get/sundown-0.1.0b.tgz
-  - tar -xzf sundown-0.1.0b.tgz
-  - sh -c "cd sundown-0.1.0b && phpize && ./configure --enable-sundown && make && sudo make install"
+  - wget http://pecl.php.net/get/sundown-0.2.0tgz
+  - tar -xzf sundown-0.2.0tgz
+  - sh -c "cd sundown-0.2.0 && phpize && ./configure --enable-sundown && make && sudo make install"
   - echo "extension=sundown.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`

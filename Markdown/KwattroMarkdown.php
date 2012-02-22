@@ -83,7 +83,7 @@ class KwattroMarkdown
      */
     public function setUpMarkdown()
     {
-        $this->parser = new Parser($this->renderer, $this->getEnabledExtensions());
+        $this->parser = new Parser($this->renderer, $this->extensions);
     }
     
     /**
