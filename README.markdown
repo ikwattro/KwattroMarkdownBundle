@@ -100,3 +100,23 @@ Syntax
 ------
 
 For more information about the ``Markdown syntax``, visit the markdown author [website] (http://daringfireball.net/projects/markdown/)
+
+Configuration Reference
+-----------------------
+
+You can configure the bundle simply in the config.yml file:
+
+````
+kwattro_markdown:
+    twig_extension: ~ // default is the twig extension provided by the bundle
+    renderer : ~ // default `html` You can choose between html | xhtml | base
+    extensions:
+        no_intra_emphasis: false
+        tables: true
+        fenced_code_blocks: true
+        autolink: true
+        strikethrough: true
+        lax_html_blocks: false
+        space_after_headers: true
+        superscript: false
+````
