@@ -26,11 +26,20 @@ class Configuration implements ConfigurationInterface
 
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('kwattro_markdown');
+        
+        $validRenderers = array('base', 'html', 'xhtml', 'custom');
 
         $rootNode
         	->children()
                     ->scalarNode('twig_extension')->defaultValue('Kwattro\MarkdownBundle\Twig\Extension\KwattroMarkdownExtension')->end()
-                    ->scalarNode('renderer')->defaultValue('html')->end()
+                    ->scalarNode('renderer')
+                        ->validate()
+                        ->ifNotInArray($validRenderers)
+                        ->thenInvalid('The renderer specified is not valid')
+                        ->end()
+                        ->isRequired()
+                        ->end()
+                ->scalarNode('renderer_class')->defaultNull()->end()
                 ->arrayNode('extensions')
                 ->addDefaultsIfNotSet()
                 ->children()

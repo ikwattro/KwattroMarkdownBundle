@@ -33,6 +33,30 @@ class KwattroMarkdownExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
         $loader->load('extensions.yml');
+        
+        $renderers = array(
+            'html' => '\Sundown\Render\HTML',
+            'xhtml' => '\Sundown\Render\XHTML',
+            'base' => '\Sundown\Render\Base',
+        );
+        
+        if('custom' !== $config['renderer'])
+        {
+            $container->setParameter('kwattro_markdown.renderer_class', $renderers[$config['renderer']]);
+        }
+        elseif('custom' === $config['renderer'])
+        {
+            if(!$config['renderer_class'])
+            {
+                throw new \InvalidArgumentException('You need to specify your Custom Render class when using the custom option');
+            }
+            
+            if(!class_exists($config['renderer_class']))
+            {
+                throw new \InvalidArgumentException('The custom render class you specified is not found');
+            }
+            $container->setParameter('kwattro_markdown.renderer_class', $config['renderer']);
+        }
     }
 	
 	public function getAlias()

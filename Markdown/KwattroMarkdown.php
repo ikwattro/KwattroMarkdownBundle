@@ -115,9 +115,9 @@ class KwattroMarkdown
         
         if(!empty($renderer) && $this->isValidRenderer($renderer))
         {
-            if(!$this->renderer instanceof $this->renderers[$renderer])
+            if(!$this->renderer instanceof $renderer)
             {
-                $this->renderer = new $this->renderers[$renderer];
+                $this->renderer = new $renderer();
             }
         }
         
@@ -139,13 +139,22 @@ class KwattroMarkdown
         throw new \InvalidArgumentException('The extension '.$extension.' is not a valid Markdown extension');
     }
     
+    public function isValidRenderer($class)
+    {
+        if(!class_exists($class))
+        {
+            throw new \InvalidArgumentException('The renderer specified is not a valid renderer for the Markdown service');
+        }
+        return true;
+    }
+    
     /**
      * Checks if the given renderer is a valid renderer
      * @param type $renderer
      * @return boolean
      * @throws \InvalidArgumentException 
      */
-    public function isValidRenderer($renderer)
+    public function isValidRendererOld($renderer)
     {
         if(!empty($renderer) && array_key_exists($renderer, $this->renderers))
         {
