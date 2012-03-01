@@ -3,6 +3,7 @@ KwattroMarkdownBundle
 
 This bundle lets you easily make use of the markdown parser inside your Symfony applications.
 
+See it in action: http://www.frenchycode.com
 Status
 ------
 
