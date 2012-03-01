@@ -26,23 +26,41 @@ class Configuration implements ConfigurationInterface
 
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('kwattro_markdown');
+        
+        $validRenderers = array('base', 'html', 'xhtml', 'custom');
 
         $rootNode
         	->children()
                     ->scalarNode('twig_extension')->defaultValue('Kwattro\MarkdownBundle\Twig\Extension\KwattroMarkdownExtension')->end()
-                    ->scalarNode('renderer')->defaultValue('html')->end()
-                ->arrayNode('extensions')
-                ->addDefaultsIfNotSet()
-                ->children()
-                    ->booleanNode('no_intra_emphasis')->defaultFalse()->end()
-                    ->booleanNode('tables')->defaultTrue()->end()
-                    ->booleanNode('fenced_code_blocks')->defaultTrue()->end()
-                    ->booleanNode('autolink')->defaultTrue()->end()
-                    ->booleanNode('strikethrough')->defaultTrue()->end()
-                    ->booleanNode('lax_html_blocks')->defaultFalse()->end()
-                    ->booleanNode('space_after_headers')->defaultTrue()->end()
-                    ->booleanNode('superscript')->defaultFalse()->end()
+                    ->scalarNode('renderer')
+                        ->validate()
+                        ->ifNotInArray($validRenderers)
+                        ->thenInvalid('The renderer specified is not valid')
+                        ->end()
+                        ->isRequired()
                     ->end()
+                    ->scalarNode('render_class')->defaultNull()->end()
+                    ->arrayNode('extensions')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->booleanNode('no_intra_emphasis')->defaultFalse()->end()
+                            ->booleanNode('tables')->defaultTrue()->end()
+                            ->booleanNode('fenced_code_blocks')->defaultTrue()->end()
+                            ->booleanNode('autolink')->defaultTrue()->end()
+                            ->booleanNode('strikethrough')->defaultTrue()->end()
+                            ->booleanNode('lax_html_blocks')->defaultFalse()->end()
+                            ->booleanNode('space_after_headers')->defaultTrue()->end()
+                            ->booleanNode('superscript')->defaultFalse()->end()
+                        ->end()
+                    ->end()
+                ->end()
+
+                
+                ->validate()
+                ->ifTrue(function($v){return 'custom' === $v['renderer'] && empty($v['render_class']); })
+                ->thenInvalid('You need to specify your custom Renderer class when using the "custom" option')
+                ->end()
+                        
                 ->end();
 
         return $treeBuilder;
