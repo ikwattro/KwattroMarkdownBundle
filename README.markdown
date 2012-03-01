@@ -96,6 +96,20 @@ You can easily use the markdown parser in your Twig templates:
     $string = $body; //Some string to transform
     $output = $markdown->render($string);
 
+#### You can custom the extensions and the render to use on the fly
+
+##### In your controllers :
+````
+$md = $this->container->get('kwattro_markdown');
+$string = $body; // some string to transform
+$output = $md->render($string, array('autolink' => false), 'xhtml')
+````
+
+##### In your templates
+````
+{{ body | markdown( {'autolink': false}, 'html') }}
+````
+
 Syntax
 ------
 
@@ -109,7 +123,8 @@ You can configure the bundle simply in the config.yml file:
 ````
 kwattro_markdown:
     twig_extension: ~ // default is the twig extension provided by the bundle
-    renderer : ~ // default `html` You can choose between html | xhtml | base
+    renderer : ~ // default `html` You can choose between html | xhtml | base | custom
+    render_class: ~ based off the renderer chosen, you have to specify one if "custom" is chosen
     extensions:
         no_intra_emphasis: false
         tables: true
