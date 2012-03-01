@@ -47,6 +47,7 @@ class KwattroMarkdown
         'base' => '\Sundown\Render\Base',
         'html' => '\Sundown\Render\HTML',
         'xhtml' => '\Sundown\Render\XHTML',
+        'custom' => '',
         );
     
     /**
@@ -59,9 +60,9 @@ class KwattroMarkdown
      * @param array $extensions_config The enabled extensions 
      */
     
-    public function __construct(array $extensions_config, $renderer)
+    public function __construct(array $extensions_config, $renderer, $render_class = null)
     {        
-        $this->configure($extensions_config, $renderer);
+        $this->configure($extensions_config, $renderer, $render_class);
     }
     
     /**
@@ -74,7 +75,6 @@ class KwattroMarkdown
     public function render($text, array $options = array(), $renderer = null)
     {
         $this->configure($options, $renderer);
-        
         return $this->transform($text);
     }
     
@@ -101,7 +101,7 @@ class KwattroMarkdown
      * @param array $extensions
      * @param string $renderer 
      */
-    public function configure(array $extensions = array(), $renderer = null)
+    public function configure(array $extensions = array(), $renderer = null, $render_class = null)
     {
         if(!empty($extensions))
         {
@@ -113,12 +113,9 @@ class KwattroMarkdown
         $this->extensions = array_merge($this->extensions, $extensions);
         }
         
-        if(!empty($renderer) && $this->isValidRenderer($renderer))
-        {
-            if(!$this->renderer instanceof $renderer)
-            {
-                $this->renderer = new $renderer();
-            }
+        if(!empty($renderer) && $this->isValidRenderer($renderer, $render_class))
+        {            
+                $this->renderer = new $this->renderers[$renderer];  
         }
         
         $this->setUpMarkdown();
@@ -139,25 +136,21 @@ class KwattroMarkdown
         throw new \InvalidArgumentException('The extension '.$extension.' is not a valid Markdown extension');
     }
     
-    public function isValidRenderer($class)
-    {
-        if(!class_exists($class))
-        {
-            throw new \InvalidArgumentException('The renderer specified is not a valid renderer for the Markdown service');
-        }
-        return true;
-    }
-    
     /**
      * Checks if the given renderer is a valid renderer
      * @param type $renderer
      * @return boolean
      * @throws \InvalidArgumentException 
      */
-    public function isValidRendererOld($renderer)
+    public function isValidRenderer($renderer, $render_class = null)
     {
         if(!empty($renderer) && array_key_exists($renderer, $this->renderers))
         {
+            if('custom' === $renderer && !class_exists($render_class))
+            {
+                throw new \InvalidArgumentException('The custom render class you specified could not be found');
+            }
+            $this->renderers['custom'] = $render_class;
             return true;
         }
         throw new \InvalidArgumentException('The renderer specified is not a valid renderer for the Markdown service');
