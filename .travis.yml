@@ -11,7 +11,7 @@ env:
 
 before_script:
   - php vendor/vendors.php
-  - wget http://pecl.php.net/get/sundown-0.2.0.tgz
+  - wget http://pecl.php.net/get/sundown-0.3.0.tgz
   - tar -xzf sundown-0.2.0.tgz
   - sh -c "cd sundown-0.2.0 && phpize && ./configure --enable-sundown && make && sudo make install"
   - echo "extension=sundown.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
