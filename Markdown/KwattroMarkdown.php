@@ -115,7 +115,7 @@ class KwattroMarkdown
         
         if(!empty($renderer) && $this->isValidRenderer($renderer, $render_class))
         {            
-                $this->renderer = new $this->renderers[$renderer];  
+                $this->renderer = new $this->renderers[$renderer]();  
         }
         
         $this->setUpMarkdown();
