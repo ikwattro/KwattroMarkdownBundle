@@ -94,6 +94,7 @@ class KwattroMarkdown
     public function transform($text)
     {
         return $this->parser->render($text);
+        
     }
     
     /**
@@ -114,8 +115,12 @@ class KwattroMarkdown
         }
         
         if(!empty($renderer) && $this->isValidRenderer($renderer, $render_class))
-        {            
-                $this->renderer = new $this->renderers[$renderer]();  
+        {       
+            $this->renderer = new $this->renderers[$renderer]();
+        }
+        else
+        {
+            $this->renderer = new $this->renderers['html'];
         }
         
         $this->setUpMarkdown();
