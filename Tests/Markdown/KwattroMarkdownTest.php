@@ -58,4 +58,12 @@ class KwattroMarkdownTest extends \PHPUnit_Framework_TestCase
         $expected = '<p>'.$link.'</p>'."\n";
         $this->assertEquals($expected, $md->render($link, array('autolink' => false)));
     }
+
+    public function testNoIntraEmphasis()
+    {
+        $md = new Markdown(array('no_intra_emphasis' => true), array(), 'html');
+        $link = "hello_world_man";
+        $expected = '<p>'.$link.'</p>'."\n";
+        $this->assertEquals($expected, $md->render($link));
+    }
 }
