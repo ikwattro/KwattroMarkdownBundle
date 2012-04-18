@@ -1,0 +1,21 @@
+{
+    "name": "kwattro/markdown-bundle",
+    "description": "A Bundle that integrates the Sundown parser",
+    "keywords": ["sundown", "markdown"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kwattro",
+            "homepage": "https://github.com/kwattro"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "2.*"
+        "symfony/twig-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": { "Kwattro\\MarkdownBundle": "" }
+    },
+    "target-dir": "Kwattro/MarkdownBundle"
+}
