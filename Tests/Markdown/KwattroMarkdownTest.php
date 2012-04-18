@@ -66,4 +66,12 @@ class KwattroMarkdownTest extends \PHPUnit_Framework_TestCase
         $expected = '<p>'.$link.'</p>'."\n";
         $this->assertEquals($expected, $md->render($link));
     }
+
+    public function testWithBaseSundownClasses()
+    {
+        $md = new \Sundown\Markdown(\Sundown\Render\HTML,array("no_intra_emphasis"=>true));
+        $txt = "no_intra_emphasis";
+        $exp = $txt;
+        $this->assertEquals($exp, $md->render($txt));
+    }
 }
