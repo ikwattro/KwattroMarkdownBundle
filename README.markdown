@@ -15,7 +15,7 @@ This bundle is in development phase. Do not hesitate to contribute.
 
 * ~~Merge the parameters with the DI config~~
 * ~~Add all possible extensions to DI config~~
-* Add flags feature
+* ~~Add flags feature~~
 * Convert config files to .xml
 * ~~Make the Twig extension use of Markdown class~~
 * Add some tests
@@ -45,7 +45,7 @@ Installation
 	# this command will fetch submodule and copy neccesary files to src dir and compile it.
 	rake submodule compile
 	sudo rake install
-	
+
 	# enable the sundown extension by adding the following line to your php.ini
 	extension=sundown.so
 
@@ -97,18 +97,18 @@ You can easily use the markdown parser in your Twig templates:
     $string = $body; //Some string to transform
     $output = $markdown->render($string);
 
-#### You can custom the extensions and the render to use on the fly
+#### You can custom the extensions and the render to use on the fly. The second array parameter is for the flags.
 
 ##### In your controllers :
 ````
 $md = $this->container->get('kwattro_markdown');
 $string = $body; // some string to transform
-$output = $md->render($string, array('autolink' => false), 'xhtml')
+$output = $md->render($string, array('autolink' => false), array(), 'xhtml')
 ````
 
 ##### In your templates
 ````
-{{ body | markdown( {'autolink': false}, 'html') }}
+{{ body | markdown( {'autolink': false}, {}, 'html') }}
 ````
 
 Syntax
@@ -135,4 +135,13 @@ kwattro_markdown:
         lax_html_blocks: false
         space_after_headers: true
         superscript: false
+    flags:
+        filter_html: false
+        no_images: false
+        no_links: false
+        no_styles: false
+        safe_links_only: false
+        with_toc_data: false
+        hard_wrap: true
+        xhtml: true
 ````

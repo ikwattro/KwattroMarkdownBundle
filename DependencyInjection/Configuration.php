@@ -2,11 +2,11 @@
 
 /**
  * This file is part of the KwattroMarkdownBundle package.
- * 
+ *
  * (c) Christophe Willemsen <willemsen.christophe@gmail.com>
- * 
+ *
  * Released under the MIT License.
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that is bundled with this package.
  */
@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
 
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('kwattro_markdown');
-        
+
         $validRenderers = array('base', 'html', 'xhtml', 'custom');
 
         $rootNode
@@ -53,15 +53,28 @@ class Configuration implements ConfigurationInterface
                             ->booleanNode('superscript')->defaultFalse()->end()
                         ->end()
                     ->end()
+                    ->arrayNode('flags')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->booleanNode('filter_html')->defaultFalse()->end()
+                            ->booleanNode('no_images')->defaultFalse()->end()
+                            ->booleanNode('no_links')->defaultFalse()->end()
+                            ->booleanNode('no_styles')->defaultFalse()->end()
+                            ->booleanNode('safe_links_only')->defaultFalse()->end()
+                            ->booleanNode('with_toc_data')->defaultFalse()->end()
+                            ->booleanNode('hard_wrap')->defaultTrue()->end()
+                            ->booleanNode('xhtml')->defaultTrue()->end()
+                        ->end()
+                    ->end()
                 ->end()
 
-                
+
                 ->validate()
                 ->ifTrue(function($v){return 'custom' === $v['renderer'] && empty($v['render_class']); })
                 ->thenInvalid('You need to specify your custom Renderer class when using the "custom" option')
                 ->end()
-                        
-                ->end();
+
+            ->end();
 
         return $treeBuilder;
     }

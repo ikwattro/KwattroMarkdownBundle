@@ -4,10 +4,10 @@ parameters:
 services:
   kwattro_markdown.twig_filter:
     class: %kwattro_markdown.twig_extension%
-    arguments: [@kwattro_markdown]
+    arguments: ["@kwattro_markdown"]
     tags:
       - { name: twig.extension }
-  
+
   kwattro_markdown:
     class: Kwattro\MarkdownBundle\Markdown\KwattroMarkdown
-    arguments: [%kwattro_markdown.extensions_config%, %kwattro_markdown.renderer%, %kwattro_markdown.render_class%]
+    arguments: [%kwattro_markdown.extensions_config%, %kwattro_markdown.flags_config%, %kwattro_markdown.renderer%, %kwattro_markdown.render_class%]

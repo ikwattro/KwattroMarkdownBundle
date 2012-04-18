@@ -8,3 +8,13 @@ parameters:
     lax_html_blocks: %kwattro_markdown.extensions.lax_html_blocks%
     space_after_headers: %kwattro_markdown.extensions.space_after_headers%
     superscript: %kwattro_markdown.extensions.superscript%
+
+  kwattro_markdown.flags_config:
+    filter_html: %kwattro_markdown.flags.filter_html%
+    no_images: %kwattro_markdown.flags.no_images%
+    no_links: %kwattro_markdown.flags.no_links%
+    no_styles: %kwattro_markdown.flags.no_styles%
+    safe_links_only: %kwattro_markdown.flags.safe_links_only%
+    with_toc_data: %kwattro_markdown.flags.with_toc_data%
+    hard_wrap: %kwattro_markdown.flags.hard_wrap%
+    xhtml: %kwattro_markdown.flags.xhtml%

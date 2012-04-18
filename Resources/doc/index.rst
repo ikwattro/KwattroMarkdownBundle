@@ -10,11 +10,11 @@ This bundle is in development phase. Do not hesitate to contribute.
 
 #### Todo's:
 
-* Merge the parameters with the DI config
+* ~~Merge the parameters with the DI config~~
 * ~~Add all possible extensions to DI config~~
-* Add flags feature
+* ~~Add flags feature~~
 * Convert config files to .xml
-* Make the Twig extension use of Markdown class
+* ~~Make the Twig extension use of Markdown class~~
 * Add some tests
 * Request feedbacks
 
@@ -41,7 +41,7 @@ Installation
 	# this command will fetch submodule and copy neccesary files to src dir and compile it.
 	rake submodule compile
 	sudo rake install
-	
+
 	# enable the sundown extension by adding the following line to your php.ini
 	# extension=sundown.so
 
