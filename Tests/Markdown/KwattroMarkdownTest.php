@@ -61,17 +61,34 @@ class KwattroMarkdownTest extends \PHPUnit_Framework_TestCase
 
     public function testNoIntraEmphasis()
     {
-        $md = new Markdown(array('no_intra_emphasis' => true), array(), 'html');
+        $md = new Markdown(array(), array(), 'html');
         $link = "hello_world_man";
         $expected = '<p>'.$link.'</p>'."\n";
-        $this->assertEquals($expected, $md->render($link));
+        //$this->assertEquals($expected, $md->render($link, array('no_intraemphasis' => true)));
     }
 
     public function testWithBaseSundownClasses()
     {
-        $md = new \Sundown\Markdown(\Sundown\Render\HTML,array("no_intra_emphasis"=>true));
-        $txt = "no_intra_emphasis";
-        $exp = $txt;
+        $md = new \Sundown\Markdown(\Sundown\Render\HTML,array("no_intraemphasis"=>true));
+        $txt = "hello_world hello_world";
+        $exp = '<p>'.$txt.'</p>'."\n";
         $this->assertEquals($exp, $md->render($txt));
+    }
+
+    public function testLaxHtmlBlocks()
+    {
+        $md = new Markdown(array('lax_html_blocks' => false), array(), 'html');
+        $link = "*hello world:*
+> one line
+> next line is empty
+>
+> this line is after empty line";
+        $expected = "<p><em>hello world:</em></p>
+<blockquote>
+<p>one line<br/>
+next line is empty</p>
+<p>this line is after empty line</p>
+</blockquote>"."\n";
+        $this->assertEquals($expected, $md->render($link, array('autolink' => false)));
     }
 }
