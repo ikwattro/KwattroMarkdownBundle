@@ -92,4 +92,26 @@ next line is empty</p>
         $this->assertEquals($expected, $md->render($link, array('autolink' => false)));
     }
 
+    public function testNestedBlockquotes()
+    {
+        $md = new Markdown(array('lax_html_blocks' => false), array(), 'html');
+        $link = "*hello world:*
+> one line
+> next line is empty
+>
+> > nested line
+>
+> this line is after empty line";
+        $expected = "<p><em>hello world:</em></p>
+<blockquote>
+<p>one line<br/>
+next line is empty</p>
+<blockquote>
+<p>nested line</p>
+</blockquote>
+<p>this line is after empty line</p>
+</blockquote>"."\n";
+        $this->assertEquals($expected, $md->render($link, array('autolink' => false)));
+    }
+
 }
