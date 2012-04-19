@@ -75,7 +75,7 @@ class KwattroMarkdownTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($exp, $md->render($txt));
     }
 
-    public function testLaxHtmlBlocks()
+    public function testBlockquotesWithEmptyLines()
     {
         $md = new Markdown(array('lax_html_blocks' => false), array(), 'html');
         $link = "*hello world:*
@@ -91,4 +91,5 @@ next line is empty</p>
 </blockquote>"."\n";
         $this->assertEquals($expected, $md->render($link, array('autolink' => false)));
     }
+
 }
