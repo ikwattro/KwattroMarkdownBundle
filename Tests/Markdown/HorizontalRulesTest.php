@@ -37,4 +37,19 @@ class HorizontalRulesTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $markdown3);
 	}
 
+	public function testNotHoriRules()
+	{
+		$md = $this->getMarkdown();
+		$text = 'jjj';
+		$text2 = ';;;';
+		$text3 = '===';
+		$md1 = $md->render($text);
+		$md2 = $md->render($text2);
+		$md3 = $md->render($text3);
+		$notExpected = '<hr/>';
+		$this->assertNotEquals($notExpected, $md1);
+		$this->assertNotEquals($notExpected, $md2);
+		$this->assertNotEquals($notExpected, $md2);
+	}
+
 }
