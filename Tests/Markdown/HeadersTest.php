@@ -114,4 +114,27 @@ Level2 title
 		$expected = '<h6>Level 6 header</h6>'."\n";
 		$this->assertEquals($expected, $markdown);	
 	}
+
+	public function testHeadersAfterAndBeforParagraphs()
+	{
+		$md = $this->getMarkdown();
+		$text = 'This is some text
+# Level
+This is some text';
+		$markdown = $md->render($text);
+		$expected = '<p>This is some text</p>
+<h1>Level</h1>
+<p>This is some text</p>'."\n";
+		$this->assertEquals($expected, $markdown);
+
+		$text = 'This is some text
+With a title
+============
+This is some text';
+		$markdown = $md->render($text);
+		$expected = '<p>This is some text</p>
+<h1>With a title</h1>
+<p>This is some text</p>'."\n";
+		$this->assertEquals($expected, $markdown);	
+	}
 }
