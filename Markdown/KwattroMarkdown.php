@@ -14,6 +14,7 @@
 namespace Kwattro\MarkdownBundle\Markdown;
 
 use Kwattro\MarkdownBundle\Parser\Parser;
+use Sundown\Render\Base as SundownRenderer;
 
 class KwattroMarkdown
 {
@@ -65,7 +66,7 @@ class KwattroMarkdown
         );
 
     /**
-     * @var string $renderer The default renderer specified by the service configuration
+     * @var string|SundownRenderer $renderer The Sundown renderer
      */
     private $renderer;
 
@@ -84,7 +85,7 @@ class KwattroMarkdown
      * @param string $text The text to transform
      * @param array $extensions The extensions configuration
      * @param array $flags The flags configuration
-     * @param string $renderer The desired renderer
+     * @param string|SundownRenderer $renderer The desired renderer
      * @return string The transformed text
      */
     public function render($text, array $extensions = array(), array $flags = array(), $renderer = null)
@@ -116,7 +117,7 @@ class KwattroMarkdown
      * Configures the Markdown with extensions and renderer sepcified
      * @param array $extensions
      * @param array $flags
-     * @param string $renderer
+     * @param string|SundownRenderer $renderer
      */
     public function configure(array $extensions = array(), array $flags = array(), $renderer = null, $render_class = null)
     {
@@ -140,7 +141,12 @@ class KwattroMarkdown
             $this->flags = array_merge($this->flags, $flags);
         }
 
-        if(!empty($renderer) && $this->isValidRenderer($renderer, $render_class))
+        if (!empty($renderer) && $renderer instanceof SundownRenderer)
+        {
+            $this->renderer = $this->renderers['custom'] = $renderer;
+            $this->renderer->setRenderFlags($this->flags);
+        }
+        elseif(!empty($renderer) && $this->isValidRenderer($renderer, $render_class))
         {
             $this->renderer = new $this->renderers[$renderer]($this->flags);
         }
