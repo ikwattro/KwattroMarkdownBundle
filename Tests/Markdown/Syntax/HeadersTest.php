@@ -99,7 +99,7 @@ Level2 title
 		$md = $this->getMarkdown();
 		$text = '#Level';
 		$markdown = $md->render($text);
-		$expected = '#Level'."\n";
+		$expected = '<h1>Level</h1>'."\n";
 		$this->assertEquals($expected, $markdown);
 	}
 
